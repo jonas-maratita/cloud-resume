@@ -12,6 +12,15 @@ resource "aws_cloudfront_origin_access_control" "default" {
   signing_protocol  = "sigv4"
 }
 
+resource "aws_acm_certificate" "cdn_certificate" {
+  domain_name       = "resume.maratita.link"  # Replace with your domain name
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
@@ -24,7 +33,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   is_ipv6_enabled     = true
   comment             = "Static website hosting for: ${aws_s3_bucket.website_bucket.bucket}"
   default_root_object = "index.html"
-  aliases = [resume.maratita.link]
+  aliases = ["resume.maratita.link"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -59,7 +68,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate.cdn_certificate.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2018"
   }
 }
 
