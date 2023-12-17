@@ -30,3 +30,7 @@ variable "content_version" {
     error_message = "The content_version must be a positive integer starting at 1."
   }
 }
+
+variable "acm_certificate_arn" {
+  description = "ARN of the ACM certificate"
+}
