@@ -12,15 +12,6 @@ resource "aws_cloudfront_origin_access_control" "default" {
   signing_protocol  = "sigv4"
 }
 
-resource "aws_acm_certificate" "cdn_certificate" {
-  domain_name       = "resume.maratita.link"  # Replace with your domain name
-  validation_method = "DNS"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
@@ -68,24 +59,30 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.cdn_certificate.arn
+    acm_certificate_arn      = var.acm_certificate_arn
     ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.2_2018"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 
-resource "terraform_data" "invalidate_cache" {
-  depends_on = [aws_cloudfront_distribution.s3_distribution]
-  triggers_replace = terraform_data.content_version.output
+#resource "terraform_data" "invalidate_cache" {
+#  depends_on = [aws_cloudfront_distribution.s3_distribution]
+#  triggers_replace = terraform_data.content_version.output
 
-  provisioner "local-exec" {
+ # provisioner "local-exec" {
     # https://developer.hashicorp.com/terraform/language/expressions/strings#heredoc-strings
-    command = <<COMMAND
-aws cloudfront create-invalidation \
---distribution-id ${aws_cloudfront_distribution.s3_distribution.id} \
---paths '/*'
-    COMMAND
+ #   command = <<COMMAND
+#aws cloudfront create-invalidation \
+#--distribution-id ${aws_cloudfront_distribution.s3_distribution.id} \
+#--paths '/*'
+#    COMMAND
 
+#  }
+#}
+
+resource "terraform_data" "invalidate_cache"{
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3_distribution.id}} --paths '/*'"
   }
 }
 

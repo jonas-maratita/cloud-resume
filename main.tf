@@ -7,6 +7,7 @@ module "cloud_resume" {
   bucket_name = var.bucket_name
   index_html_filepath = var.index_html_filepath
   content_version = var.content_version
+  acm_certificate_arn = var.acm_certificate_arn
   }
 
 
