@@ -1,12 +1,12 @@
-name: Upload Website
+name: Front-End CICD
 
 on:
   push:
     branches:
     - main
 
-jobs: front-end-cicd;
-  deploy:
+jobs: 
+  front-end-cicd:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
