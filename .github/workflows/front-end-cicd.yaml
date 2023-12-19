@@ -5,7 +5,7 @@ on:
     branches:
     - main
 
-jobs: front-end-cicd
+jobs: front-end-cicd;
   deploy:
     runs-on: ubuntu-latest
     steps:
