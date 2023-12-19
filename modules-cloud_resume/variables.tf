@@ -26,3 +26,4 @@ variable "content_version" {
 variable "acm_certificate_arn" {
   description = "ARN of the ACM certificate"
 }
+
