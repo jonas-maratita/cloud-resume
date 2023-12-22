@@ -72,7 +72,7 @@ resource "aws_lambda_function_url" "url"{
     authorization_type = "NONE"
     cors{
 
-        allow_credentials = true
+        allow_credentials = false
         allow_origins = ["https://resume.maratita.link"]
         allow_methods = ["*"]
         allow_headers = ["date", "keep-alive"]
