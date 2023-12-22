@@ -49,7 +49,7 @@ resource "aws_iam_policy" "iam_policy_for_cloud_resume" {
          "Action": [
             "dynamoDB:UpdateItem",
             "dynamoDB:GetItem",
-            "dyanmoDB:PutItem"
+            "dynamoDB:PutItem"
          ],
          "Resource": "arn:aws:dynamodb:*:*:table/cloud-resume"
         },
