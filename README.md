@@ -43,3 +43,7 @@ resource "aws_s3_object" "upload_assets" {
 }
 ```
 [Back To Top](#cloud-resume)
+
+### Adding Blog to Cloud Resume
+
+I created an A record in Route53 to point to blog.maratita.link. The blog is hosted by Hashnode.
