@@ -10,7 +10,7 @@ var typed = new Typed('#typed', {
 
 const counter = document.querySelector(".counter-number");
 async function updateCounter() {
-    let response = await fetch("https://ksgn54sfuehdcimscsgcme5zdq0ustpa.lambda-url.us-east-1.on.aws/");
+    let response = await fetch("https://qx4i3eeoc6qh7jhnugieqi4bue0btyux.lambda-url.us-east-1.on.aws/");
     let data = await response.json();
     counter.innerHTML = ` Views: ${data}`;
 }

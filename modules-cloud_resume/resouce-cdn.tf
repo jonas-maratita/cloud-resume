@@ -24,7 +24,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   is_ipv6_enabled     = true
   comment             = "Static website hosting for: ${aws_s3_bucket.website_bucket.bucket}"
   default_root_object = "index.html"
-  aliases = ["resume.maratita.link"]
+  aliases = ["resume.jonasmaratita.com"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
