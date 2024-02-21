@@ -11,7 +11,7 @@ a bootcamp offered by [Intellectual Point](https://intellectualpoint.com/) where
 ## Terraform
 I attended Andrew Brown's Terraform beginner bootcamp. The Terraform code used here is derived from code that was used during the bootcamp.
 
-I did struggle with uploading the asset directory and subdirectories to S3. The content types for each file was uploading as application/octet instead of text/html or whatever content type was required for the object. My brother assisted greatly in helping to refactor the code as shown below to upload to S3.
+I did struggle with uploading the asset directory and subdirectories to S3. The content types for each file was uploading as application/octet instead of text/html or whatever content type was required for the object. My brother [Michael Maratita](https://github.com/michaelmaratita) assisted greatly in helping to refactor the code as shown below to upload to S3.
 
 ```tf
 locals {
